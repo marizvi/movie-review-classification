@@ -34,7 +34,7 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get Json request    
-    model = joblib.load('static/grid.pkl')
+    model = joblib.load('static/grid_model.pkl')
 
     feat_data = request.get_json()
     print(feat_data)
