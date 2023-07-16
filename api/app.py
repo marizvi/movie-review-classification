@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+model = joblib.load('./static/movie_review_model_svc.pkl')
 app = Flask(__name__)
 
 @app.route("/")
@@ -45,7 +46,6 @@ def custom_tokenizer(text):
     return processed_tokens
 if __name__=='__main__':
     print('main function')
-    model = joblib.load('./static/movie_review_model_svc.pkl')
     print('Model loaded')
     app.run()
 
