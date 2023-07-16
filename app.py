@@ -30,24 +30,24 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World!"
 
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     # Get Json request    
-#     model = joblib.load('./api/static/pipe.pkl')
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Get Json request    
+    model = joblib.load('pipe.pkl')
 
-#     feat_data = request.get_json()
-#     print(feat_data)
-#     #convert json to dataframe
-#     df = pd.DataFrame(feat_data)
-#     df = df.reindex(columns=['phrase'])
-#     print(df)
+    feat_data = request.get_json()
+    print(feat_data)
+    #convert json to dataframe
+    df = pd.DataFrame(feat_data)
+    df = df.reindex(columns=['phrase'])
+    print(df)
 
-#     # print('transform: ',vect.fit_transform(df['phrase'].values))
+    # print('transform: ',vect.fit_transform(df['phrase'].values))
 
-#     #predict
-#     prediction = list(model.predict(df['phrase'].values))
+    #predict
+    prediction = list(model.predict(df['phrase'].values))
 
-#     return jsonify({'sentiment': str(prediction)})
+    return jsonify({'sentiment': str(prediction)})
 
 
 if __name__=='__main__':
