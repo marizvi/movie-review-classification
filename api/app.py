@@ -34,7 +34,7 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get Json request    
-    model = joblib.load('./api/pipe.pkl')
+    model = joblib.load('pipe.pkl')
 
     feat_data = request.get_json()
     print(feat_data)
