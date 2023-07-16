@@ -30,7 +30,6 @@ app = Flask(__name__)
 def hello_world():
     return "Hello World!"
 
-
 # @app.route('/predict', methods=['POST'])
 # def predict():
 #     # Get Json request    
