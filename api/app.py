@@ -34,7 +34,7 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get Json request    
-    model = joblib.load('static/movie_review_model_svc.pkl')
+    model = joblib.load('pipe.pkl')
 
     feat_data = request.get_json()
     print(feat_data)
