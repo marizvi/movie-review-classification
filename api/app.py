@@ -13,7 +13,7 @@ def hello_world():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-
+    model = joblib.load('./static/movie_review_model_svc.pkl')
     # Get Json request    
     feat_data = request.get_json()
     print(feat_data)
