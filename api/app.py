@@ -45,6 +45,6 @@ def custom_tokenizer(text):
     # Return the processed tokens
     return processed_tokens
 if __name__=='__main__':
-    # model = joblib.load('movie_review_model_svc.pkl')
+    model = joblib.load('./static/movie_review_model_svc.pkl')
     
     app.run(port=5000, debug=True)
