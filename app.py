@@ -8,23 +8,6 @@ from nltk.stem import PorterStemmer
 # nltk.download('stopwords')
 app = Flask(__name__)
 
-def custom_tokenizer(text):
-# Tokenization
-    stemmer = PorterStemmer()
-    stop_words = set(stopwords.words('english'))
-
-    tokens = text.split()
-    
-    # Remove stopwords, and stem the words
-    processed_tokens = [
-        stemmer.stem(token)
-        for token in tokens
-        if token.lower() not in stop_words
-    ]
-    
-    # Return the processed tokens
-    return processed_tokens
-
 
 @app.route("/")
 def hello_world():
@@ -33,7 +16,7 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get Json request    
-    model = joblib.load('grid_model.pkl')
+    model = joblib.load('pipe.pkl')
 
     feat_data = request.get_json()
     print(feat_data)
@@ -49,5 +32,21 @@ def predict():
 
 
 if __name__=='__main__':
+    def custom_tokenizer(text):
+        # Tokenization
+        stemmer = PorterStemmer()
+        stop_words = set(stopwords.words('english'))
+
+        tokens = text.split()
+        
+        # Remove stopwords, and stem the words
+        processed_tokens = [
+            stemmer.stem(token)
+            for token in tokens
+            if token.lower() not in stop_words
+        ]
+        
+        # Return the processed tokens
+        return processed_tokens
     app.run()
 
