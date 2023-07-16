@@ -44,7 +44,6 @@ def predict():
     print(df)
     #vectorize
     df['phrase_custom'] = df['phrase'].apply(custom_tokenizer)
-    print(df)
     #predict
     prediction = list(model.predict(df['phrase_custom'].values))
 
