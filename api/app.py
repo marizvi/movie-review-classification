@@ -27,23 +27,24 @@ def predict():
 
     return jsonify({'sentiment': str('prediction')})
 
-# stop_words = set(stopwords.words('english'))
 
-# def custom_tokenizer(text):
-# # Tokenization
-#     tokens = text.split()
+def custom_tokenizer(text):
+# Tokenization
+    stemmer = PorterStemmer()
+    stop_words = set(stopwords.words('english'))
+
+    tokens = text.split()
     
-#     # Remove stopwords, and stem the words
-#     processed_tokens = [
-#         stemmer.stem(token)
-#         for token in tokens
-#         if token.lower() not in stop_words
-#     ]
+    # Remove stopwords, and stem the words
+    processed_tokens = [
+        stemmer.stem(token)
+        for token in tokens
+        if token.lower() not in stop_words
+    ]
     
-#     # Return the processed tokens
-#     return processed_tokens
+    # Return the processed tokens
+    return processed_tokens
 if __name__=='__main__':
-    # stemmer = PorterStemmer()
     # model = joblib.load('movie_review_model_svc.pkl')
     
     app.run(port=5000, debug=True)
