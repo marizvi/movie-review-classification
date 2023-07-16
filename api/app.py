@@ -23,7 +23,7 @@ def predict():
     print(df)
 
     #predict
-    # prediction = list(model.predict(df['phrase'].values))
+    prediction = list(model.predict(df['phrase'].values))
 
     return jsonify({'sentiment': str('prediction')})
 
@@ -45,6 +45,6 @@ def custom_tokenizer(text):
     # Return the processed tokens
     return processed_tokens
 if __name__=='__main__':
-    # model = joblib.load('movie_review_model_svc.pkl')
+    model = joblib.load('movie_review_model_svc.pkl')
     
     app.run(port=5000, debug=True)
