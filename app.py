@@ -6,8 +6,8 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
 
-# nltk.download('stopwords')
 app = Flask(__name__)
+nltk.download('stopwords')
 
 def custom_tokenizer(text):
     # Tokenization
