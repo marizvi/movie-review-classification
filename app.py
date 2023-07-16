@@ -6,6 +6,7 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
 # nltk.download('stopwords')
+app = Flask(__name__)
 
 def custom_tokenizer(text):
 # Tokenization
@@ -24,7 +25,6 @@ def custom_tokenizer(text):
     # Return the processed tokens
     return processed_tokens
 
-app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
