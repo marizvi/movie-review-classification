@@ -25,7 +25,6 @@ from nltk.stem import PorterStemmer
 #     return processed_tokens
 
 app = Flask(__name__)
-model = joblib.load('static/grid.pkl')
 
 @app.route("/")
 def hello_world():
@@ -35,6 +34,8 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get Json request    
+    model = joblib.load('static/grid.pkl')
+
     feat_data = request.get_json()
     print(feat_data)
     #convert json to dataframe
