@@ -1,8 +1,8 @@
 import pandas as pd
 import joblib
 from flask import Flask, jsonify, request
-# from nltk.corpus import stopwords
-# from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
 
 app = Flask(__name__)
 
@@ -11,21 +11,21 @@ def hello_world():
     return "Hello World!"
 
 
-# @app.route('/predict', methods=['POST'])
-# def predict():
+@app.route('/predict', methods=['POST'])
+def predict():
 
-#     # Get Json request    
-#     feat_data = request.get_json()
-#     print(feat_data)
-#     #convert json to dataframe
-#     df = pd.DataFrame(feat_data)
-#     df = df.reindex(columns=['phrase'])
-#     print(df)
+    # Get Json request    
+    feat_data = request.get_json()
+    print(feat_data)
+    #convert json to dataframe
+    df = pd.DataFrame(feat_data)
+    df = df.reindex(columns=['phrase'])
+    print(df)
 
-#     #predict
-#     prediction = list(model.predict(df['phrase'].values))
+    #predict
+    # prediction = list(model.predict(df['phrase'].values))
 
-#     return jsonify({'sentiment': str(prediction)})
+    return jsonify({'sentiment': str('prediction')})
 
 # stop_words = set(stopwords.words('english'))
 
