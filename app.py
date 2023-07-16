@@ -5,9 +5,28 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
+
 # nltk.download('stopwords')
 app = Flask(__name__)
 
+def custom_tokenizer(text):
+    # Tokenization
+    stemmer = PorterStemmer()
+    stop_words = set(stopwords.words('english'))
+    tokens = text.split()
+    
+    # Remove stopwords, stem, and lemmatize the words
+    processed_tokens = [
+        stemmer.stem(token)
+        for token in tokens
+        if token.lower() not in stop_words
+    ]
+    token_string = " ".join(processed_tokens)
+    
+    # Return the processed tokens
+    return token_string
+
+model = joblib.load('grid.pkl')
 
 @app.route("/")
 def hello_world():
@@ -16,7 +35,6 @@ def hello_world():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get Json request    
-    model = joblib.load('pipe.pkl')
 
     feat_data = request.get_json()
     print(feat_data)
@@ -24,29 +42,15 @@ def predict():
     df = pd.DataFrame(feat_data)
     df = df.reindex(columns=['phrase'])
     print(df)
-
+    #vectorize
+    df['phrase_custom'] = df['phrase'].apply(custom_tokenizer)
+    print(df)
     #predict
-    prediction = list(model.predict(df['phrase'].values))
+    prediction = list(model.predict(df['phrase_custom'].values))
 
     return jsonify({'sentiment': str(prediction)})
 
 
 if __name__=='__main__':
-    def custom_tokenizer(text):
-        # Tokenization
-        stemmer = PorterStemmer()
-        stop_words = set(stopwords.words('english'))
-
-        tokens = text.split()
-        
-        # Remove stopwords, and stem the words
-        processed_tokens = [
-            stemmer.stem(token)
-            for token in tokens
-            if token.lower() not in stop_words
-        ]
-        
-        # Return the processed tokens
-        return processed_tokens
     app.run()
 
