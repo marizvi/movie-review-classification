@@ -13,7 +13,6 @@ def hello_world():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    model = joblib.load('./static/movie_review_model_svc.pkl')
     # Get Json request    
     feat_data = request.get_json()
     print(feat_data)
@@ -45,6 +44,8 @@ def custom_tokenizer(text):
     # Return the processed tokens
     return processed_tokens
 if __name__=='__main__':
+    print('main function')
     model = joblib.load('./static/movie_review_model_svc.pkl')
     print('Model loaded')
-    app.run(port=5000)
+    app.run()
+
