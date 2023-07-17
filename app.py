@@ -7,7 +7,7 @@ from nltk.stem import PorterStemmer
 
 
 app = Flask(__name__)
-nltk.download('stopwords')
+# nltk.download('stopwords')
 
 def custom_tokenizer(text):
     # Tokenization
@@ -45,11 +45,10 @@ def predict():
     #vectorize
     df['phrase_custom'] = df['phrase'].apply(custom_tokenizer)
     #predict
-    prediction = list(model.predict(df['phrase_custom'].values))
-
-    return jsonify({'sentiment': str(prediction)})
+    prediction = model.predict(df['phrase_custom'].values)
+    return jsonify({'sentiment':prediction.tolist()})
 
 
 if __name__=='__main__':
-    app.run()
+    app.run(port=5000)
 
