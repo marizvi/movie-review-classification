@@ -37,6 +37,14 @@ class _HomePageState extends State<HomePage> {
     3: "assets/emoji/smile_big_eyes.json",
     4: "assets/emoji/star_struck.json",
   };
+  Map<int, String> emojiMapPng = {
+    -1: "assets/emoji/load1.gif",
+    0: "assets/emoji/triumph.png",
+    1: "assets/emoji/sad.png",
+    2: "assets/emoji/slightly_happy.png",
+    3: "assets/emoji/smile_big_eyes.png",
+    4: "assets/emoji/star_struck.png",
+  };
   Future<void> requestBackend() async {
     // final debouncer = Debouncer(milliseconds: 1000);
     EasyDebounce.debounce('my-tag', Duration(milliseconds: 800), () async {
@@ -236,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                               Image.asset(
                                 emojiMap[score]!,
                                 height: 100,
-                                color: Colors.white,
+                                color: score == -1 ? Colors.white : null,
                               ),
                             if (score >= 0 && score <= 4 && caption.isNotEmpty)
                               Container(

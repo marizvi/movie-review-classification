@@ -80,6 +80,11 @@ flutter:
     - assets/emoji/slightly_happy.json
     - assets/emoji/sad.json
     - assets/emoji/welcome_bot.json
+    - assets/emoji/sad.png
+    - assets/emoji/slightly_happy.png
+    - assets/emoji/triumph.png
+    - assets/emoji/smile_big_eyes.png
+    - assets/emoji/star_struck.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
