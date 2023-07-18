@@ -3,7 +3,7 @@ import joblib
 from flask import Flask, jsonify, request
 import nltk
 from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 
 
 app = Flask(__name__)
@@ -11,13 +11,16 @@ app = Flask(__name__)
 
 def custom_tokenizer(text):
     # Tokenization
-    stemmer = PorterStemmer()
+    lemmatizer = WordNetLemmatizer()
     stop_words = set(stopwords.words('english'))
+    negations = ['not','isn\'t,','wasn\'t','aren\'t','weren\'t','don\'t','didn\'t','doesn\'t','can\'t','isn\'t']
+    # remove negations from stop words
+    stop_words = stop_words - set(negations)
     tokens = text.split()
     
     # Remove stopwords, stem, and lemmatize the words
     processed_tokens = [
-        stemmer.stem(token)
+        lemmatizer.lemmatize(token)
         for token in tokens
         if token.lower() not in stop_words
     ]
